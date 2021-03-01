@@ -1,0 +1,89 @@
+{% extends 'admin_base/index.html' %}
+
+
+{% block inner_content %}
+<div class="container">
+
+  <!-- Button trigger modal -->
+
+
+
+
+  <div class="row">
+
+    <div class="col-8 mx-auto mt-5">
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Course
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="100" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form action="" method="POST">
+            {% csrf_token %}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+                
+                {% for field in form %}
+                  <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                  </div>
+                {% endfor %}
+    
+            
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-info">Save</button>
+                  
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">course Name</th>
+            <th scope="col">Course Duration</th>
+            <th scope="col">Update Course</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{course.name}}</td>
+            <td>{{course.year}}</td>
+            <td>
+              <a href="{% url 'course_update' course.id  %}">Edit</a>
+              <a href="{% url 'course_delete' course.id %}" class="ml-2 text-danger">delete</a>
+            </td>
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+
+       <!-- Button trigger modal -->
+    
+
+    </div>
+  </div>
+</div>
+{% endblock inner_content %}

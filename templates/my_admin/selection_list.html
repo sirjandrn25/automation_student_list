@@ -1,0 +1,77 @@
+{% extends 'admin_base/index.html' %}
+
+{% block inner_content %}
+    <div class="container mt-3">
+        <form action="" method="get" id="form">
+            <div class="form-inline">
+                <select name="search_by_course" class="custom-select custom-select-md mb-2 mr-2" id="course_select">
+                    <option value="">all</option>
+                    
+                    {% for course in courses %}
+                    <option value="{{course.id}}">{{course}}</option>
+                    {% endfor %}
+                        
+                    
+                  </select>
+                
+            </div>
+              
+        </form>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Roll No</th>
+                <th scope="col">Rank</th>
+                <th scope="col">Course</th>
+                <th scope="col">Priority</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for select in selections %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{select.student.fname}} {{select.student.lname}}</td>
+                <td>{{select.student.roll_no}}</td>
+                <td>{{select.student.rank}}</td>
+                <td>{{select.course}}</td>
+                <td>
+                    {% if select.girl_priorty %}
+                        <span>Grirl priorty</span>
+                    {%elif select.tribe_priority %}
+                    <span>Tribe Priorty</span>
+                    {% else %}
+                    <span>Normal</span>
+                    {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    <script>
+        let course_select = document.getElementById('course_select');
+        course_select.addEventListener('change',e=>{
+            const form = document.getElementById('form');
+            form.submit();
+        })
+
+        const init = ()=>{
+            let search_course = window.location.href.split('?')[1]
+            if (search_course){
+
+                for(let opt of course_select.options){
+                    if (opt.value === search_course.split('=')[1]){
+                        opt.selected=true;
+                    }
+                }
+            }
+        }
+
+        window.onload=init()
+    </script>
+{% endblock inner_content %}
+    

@@ -1,0 +1,24 @@
+{% extends 'admin_base/index.html' %}
+
+
+{% block inner_content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-7 mx-auto p-3 bg-light">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h3 class="text-info text-center p-2">Add Student</h3>
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{field.label_tag}}
+                            {{field}}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-info">Add Student</button>
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock inner_content %}
+    

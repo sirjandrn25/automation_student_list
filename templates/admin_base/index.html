@@ -1,0 +1,41 @@
+{% extends 'base/layout.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 border-right bg-light p-0 py-5">
+                <ul class="nav flex-column " style="height:88vh;">
+                    <li class="nav-item ">
+                      <a class="nav-link active" href="{% url 'admin_index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'add_student' %}">Add Student</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'view_student' %}">Student List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admission_application' %}">Admission Application</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'student_selections' %}">Selection List</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'course_view' %}">Course</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'course_category' %}">Course Category</a>
+                  </li>
+                  </ul>
+            </div>
+            <div class="col-10">
+                
+                {% block inner_content %}
+                    
+                {% endblock inner_content %}
+                    
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

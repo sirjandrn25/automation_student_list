@@ -1,0 +1,29 @@
+{% extends 'base/layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-5 mx-auto p-3 bg-light">
+                <h3 class="text-center p-2 border text-info">Student Login Here</h3>
+                
+                {% for message in messages %}
+                    <h4 class="alert alert-danger">{{message}}</h4>
+                {% endfor %}
+                    
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{field.label_tag}}
+                            {{field}}
+                        </div>
+                    {% endfor %}
+                        
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

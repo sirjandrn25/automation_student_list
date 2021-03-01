@@ -1,0 +1,42 @@
+{% extends 'admin_base/index.html' %}
+
+{% block inner_content %}
+    <div class="container p-3">
+        <a href="{% url 'generate_result' %}" class="btn btn-info my-2">Generate Result</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sno.</th>
+                    <th scope="col">Full Name</th>
+                    
+                    <th scope="col">Rank</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Roll No</th>
+                    <th scope="col">Choose Courses</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  {% for item in choose_course_list %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td >{{item.student.fname}} {{item.student.lname}}</td>
+              
+                 
+                    <td>{{item.student.rank}}</td>
+                    <td>{{item.student.gender}}</td>
+                    <td>{{item.student.roll_no}}</td>
+                    <td>
+                      
+                      {% for course in item.courses %}
+                        <span>{{course}}</span>, 
+                      {% endfor %}
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock inner_content %}
+    

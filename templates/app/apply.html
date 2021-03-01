@@ -1,0 +1,105 @@
+{% extends 'base/layout.html' %}
+
+{% block title %}
+Apply For Admission
+{% endblock title %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+
+        <div class="col-6 mx-auto p-3 bg-light">
+
+            <div class="p-3">
+                <span class="float-right">
+                    <a href="{% url 'student_logout' %}" class="btn btn-info btn-sm">Logout</a>
+                </span>
+                <span class="text-capitalize d-block">Name : {{student.fname}} {{student.lname}}</span>
+                <span class="d-block">
+                    Rank : {{student.rank}}
+                </span>
+                <span class="d-block">
+                    Ioe Roll No : {{student.roll_no}}
+                </span>
+                
+            </div>
+            {% if choose_courses %}
+        
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for course in choose_courses %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{course.course_cat}}</td>
+                    <td>{{course.priority}}</td>
+                    <td>
+                        {% if course.select %}
+                            <span class="text-success">selected</span>
+                        {% else %}
+                            <span class="text-danger">
+                                unselect
+                            </span>
+                        {% endif %}
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            
+                
+            {% else %}
+            <form action="" method="POST">
+
+                {% csrf_token %}
+                <h3 class="text-info text-capitalized p-2 border text-center">Apply For Admission</h3>
+
+                {% for message in messages %}
+                <div class="alert alert-danger">
+                    {{message}}
+                </div>
+                {% endfor %}
+
+                <table class="table text-center">
+                    <thead>
+                        <th scope="col">Course</th>
+                        <th scope="col">Priority</th>
+                    </thead>
+                    <tbody id="table">
+
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{course}}</td>
+                            <td>
+                                <input type="number" name="{{course.id}}" value="" placeholder="add course priority">
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                <hr>
+                <button type="submit" class="ml-2 btn btn-primary px-3">Submit</button>
+            </form>
+            {% endif %}
+                
+
+        </div>
+    </div>
+</div>
+{{ course_data|json_script:"course_data" }}
+{% endblock content %}
+{% block js_script %}
+
+
+{% endblock js_script %}
